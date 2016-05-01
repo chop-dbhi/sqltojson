@@ -1,0 +1,226 @@
+# Workers and max connections to database.
+workers: 20
+connections: 10
+
+# Database conection.
+connection:
+  driver: postgres
+  params:
+    host: 127.0.0.1
+    port: 5432
+    database: mydb
+    user: postgres
+
+# Elasticserach index name and type.
+index: chop
+type: patient
+
+# Document schema. Columns names and the nested will be the keys in the
+# output document. The`key` is passed in as params to the `nested` queries.
+# The `nested` keys are added to the parent document.
+schema:
+  key:
+    - id
+
+  type: patient
+
+  sql: >
+    select p.id, alias, ethnicity, race, sex, org.name as organization
+    from patient p
+    left outer join organization org on (p.organization_id = org.id)
+
+  nested:
+    diagnoses:
+        type: diagnosis
+
+        sql: >
+          select name, icd9, age
+          from diagnosisdetail dd
+          inner join diagnosis d on (dd.diagnosis_id = d.id)
+          where dd.patient_id = :id
+
+    problems:
+        type: problem
+
+        sql: >
+          select name, icd9, noted_age, resolved_age
+          from problemdetail pd
+          inner join diagnosis d on (pd.icd9_id = d.id)
+          where pd.patient_id = :id
+
+    procedures:
+        type: procedure
+
+        sql: >
+          select name, code as cpt4, age
+          from proceduredetail pd
+          inner join procedure p on (pd.procedure_id = p.id)
+          where pd.patient_id = :id
+
+    audiograms:
+        type: audiogram
+
+        key:
+          - id
+
+        exclude:
+          - id
+
+        sql: >
+          select id, loss_symmetry, has_conductive_loss, has_sensorineural_loss
+          from audiogramtest
+          where patient_id = :id
+
+        nested:
+          results:
+              type: audiogram_result
+
+              exclude:
+                - id
+                - created
+                - modified
+                - test_id
+
+              sql: >
+                select *
+                from audiogramresult
+                where test_id = :id
+
+    tympanograms:
+        type: tympanogram
+
+        key:
+          - id
+
+        exclude:
+          - id
+
+        sql: >
+          select id
+          from tympanogramtest
+          where patient_id = :id
+
+        nested:
+          results:
+              type: tympanogram_result
+
+              sql: >
+                select ear, type, probe_freq, mep, sc, volume
+                from tympanogramresult
+                where test_id = :id
+
+    abrs:
+        type: abr
+
+        key:
+          - id
+
+        exclude:
+          - id
+
+        sql: >
+          select id
+          from abrtest
+          where patient_id = :id
+
+        nested:
+          results:
+              type: abr_result
+
+              exclude:
+                - id
+                - created
+                - modified
+                - test_id
+                - click_comment
+                - f500_comment
+                - f1000_comment
+                - f2000_comment
+                - f4000_comment
+
+              sql: >
+                select *
+                from abrresult
+                where test_id = :id
+
+    memr:
+        type: middle_ear_muscle_reflex
+
+        key:
+          - id
+
+        exclude:
+          - id
+
+        sql: >
+          select id
+          from middleearmusclereflextest
+          where patient_id = :id
+
+        nested:
+          results:
+              type: middle_ear_muscle_reflex_result
+
+              exclude:
+                - id
+                - created
+                - modified
+
+              sql: >
+                select *
+                from middleearmusclereflexresult
+                where test_id = :id
+
+    speech:
+        type: speech
+
+        key:
+          - id
+
+        exclude:
+          - id
+
+        sql: >
+          select id
+          from speechtest
+          where patient_id = :id
+
+        nested:
+          thresholds:
+              type: speech_threshold
+
+              sql: >
+                select condition, ear, stimulus, sat, srt
+                from speechthresholds
+                where test_id = :id
+
+          wrs:
+              type: speech_word_recognition
+
+              sql: >
+                select condition, ear, stimulus, percent, db, sn, num_words, masked
+                from speechwordrecognition
+                where test_id = :id
+
+    oae:
+        type: oae
+
+        key:
+          - id
+
+        exclude:
+          - id
+
+        sql: >
+          select id
+          from otoacousticemissiontest
+          where patient_id = :id
+
+        nested:
+          results:
+              type: oae_result
+
+              sql: >
+                select ear, oae, result
+                from otoacousticemissionresult
+                where test_id = :id

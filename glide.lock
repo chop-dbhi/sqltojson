@@ -1,0 +1,16 @@
+hash: 50971963638be16f32ab35b674c9721ce06d72107e562c14fe0e185d6b55deb3
+updated: 2016-05-01T07:19:40.565971337-04:00
+imports:
+- name: github.com/chop-dbhi/sql-agent
+  version: f5097c344c9006f6d045e5867043680cd8de4f78
+- name: github.com/jmoiron/sqlx
+  version: 398dd5876282499cdfd4cb8ea0f31a672abe9495
+  subpackages:
+  - reflectx
+- name: golang.org/x/net
+  version: 35ec611a141ee705590b9eb64d673f9e6dfeb1ac
+  subpackages:
+  - context
+- name: gopkg.in/yaml.v2
+  version: a83829b6f1293c91addabc89d0571c246397bbf4
+devImports: []

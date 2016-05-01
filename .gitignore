@@ -1,0 +1,8 @@
+.DS_Store
+*.sw?
+*.yaml
+*.json
+vendor/
+dist/
+sqltojson
+!config.example.yaml
