@@ -11,7 +11,7 @@ Requires
 * [Glide](https://glide.sh)
 * Go >=1.5 with `GO15VENDOREXPERIMENT=1`
 
-```
+```bash
 git clone https://github.com/chop-dbhi/sqltojson.git && cd sqltojson
 glide install
 make build
@@ -41,7 +41,7 @@ If `files.data` is set to `-`, the output will be written to stdout. This may be
 
 ```bash
 sqltojson -config config-stdout.yaml | gzip -c > data.json.gz
-
+```
 
 ## Elasticsearch
 
