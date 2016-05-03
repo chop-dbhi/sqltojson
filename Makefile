@@ -11,4 +11,8 @@ dist:
 		-o "dist/darwin-amd64/$(PROG_NAME)" \
 		./cmd/sqltojson
 
+install:
+	export GO15VENDOREXPERIMENT=1
+	glide install
+
 .PHONY: dist
