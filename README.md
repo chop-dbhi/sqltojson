@@ -13,7 +13,7 @@ Requires
 
 ```
 git clone https://github.com/chop-dbhi/sqltojson.git && cd sqltojson
-glide -y glide.lock install
+glide install
 make build
 ```
 
