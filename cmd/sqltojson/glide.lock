@@ -1,0 +1,34 @@
+hash: 26734968303a409163d1a04df8129cf9e0a8b21ef4b7787a06ea91bbe17f47a5
+updated: 2016-05-03T07:05:06.005604947-04:00
+imports:
+- name: github.com/chop-dbhi/sql-agent
+  version: 40f506f45970bf4a9677a286de83b36468b33121
+- name: github.com/chop-dbhi/sqltojson
+  version: 13698d09e6ff1c5748bb10a00a30bb3a47e76190
+- name: github.com/denisenkom/go-mssqldb
+  version: 8d4984e8baccbf5bfadd7f7e366fd61b7ccac38b
+- name: github.com/go-sql-driver/mysql
+  version: 7ebe0a500653eeb1859664bed5e48dec1e164e73
+- name: github.com/jmoiron/sqlx
+  version: 398dd5876282499cdfd4cb8ea0f31a672abe9495
+  subpackages:
+  - reflectx
+- name: github.com/lib/pq
+  version: dd3290b2f71a8b30bee8e4e75a337a825263d26f
+  subpackages:
+  - oid
+- name: github.com/mattn/go-oci8
+  version: 6745e6d5e2f67aca32440ccf279425e3bb20c756
+- name: github.com/mattn/go-sqlite3
+  version: 7204887cf3a42df1cfaa5505dc3a3427f6dded8b
+- name: golang.org/x/crypto
+  version: 285fb2ed20d1dc450fc743a1b3ff7c36bef372b9
+  subpackages:
+  - md4
+- name: golang.org/x/net
+  version: 35ec611a141ee705590b9eb64d673f9e6dfeb1ac
+  subpackages:
+  - context
+- name: gopkg.in/yaml.v2
+  version: a83829b6f1293c91addabc89d0571c246397bbf4
+devImports: []
