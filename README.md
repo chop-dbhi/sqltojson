@@ -6,12 +6,15 @@ Currently the data output is in the [bulk format](https://www.elastic.co/guide/e
 
 ## Install
 
-Reqires [Glide](https://glide.sh).
+Requires
+
+* [Glide](https://glide.sh)
+* Go >=1.5 with `GO15VENDOREXPERIMENT=1`
 
 ```
-git clone https://github.com/chop-dbhi/sqltojson.git
-glide install
-make install
+git clone https://github.com/chop-dbhi/sqltojson.git && cd sqltojson
+glide -y glide.lock install
+make build
 ```
 
 ## Config
