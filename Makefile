@@ -7,12 +7,8 @@ build:
 		./cmd/sqltojson
 
 dist:
-	mkdir -p dist
-
-	gox -ldflags "-X \"main.buildVersion=$(GIT_VERSION)\"" \
-    	-os "darwin linux windows" \
-        -arch "amd64" \
-        -output="./dist/{{.OS}}/{{.Arch}}/$(PROG_NAME)" \
+	go build -ldflags "-X \"main.buildVersion=$(GIT_VERSION)\"" \
+		-o "dist/darwin-amd64/$(PROG_NAME)" \
 		./cmd/sqltojson
 
 .PHONY: dist
