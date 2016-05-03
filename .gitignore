@@ -4,6 +4,6 @@
 *.json
 vendor/
 dist/
-sqltojson
+./sqltojson
 !glide.yaml
 !config.example.yaml

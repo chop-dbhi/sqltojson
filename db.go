@@ -1,4 +1,4 @@
-package main
+package sqltojson
 
 import (
 	"github.com/chop-dbhi/sql-agent"

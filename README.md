@@ -6,16 +6,18 @@ Currently the data output is in the [bulk format](https://www.elastic.co/guide/e
 
 ## Install
 
-Requires
+The pre-packaged binary includes drivers for:
 
-* [Glide](https://glide.sh)
-* Go >=1.5 with `GO15VENDOREXPERIMENT=1`
+- PostgreSQL
+- SQLite
+- MSSQL
+- MySQL/MariaDB
+- Oracle
+- (ODBC coming soon)
 
-```bash
-git clone https://github.com/chop-dbhi/sqltojson.git && cd sqltojson
-glide install
-make build
-```
+Download it from the [releases](https://github.com/chop-dbhi/sqltojson/releases) page.
+
+To keep the library simple, the `sqltojson` library does not contain any drivers, but it is trivial to create a program with only the driver you want. See the [cmd/sqltojson main file](./cmd/sqltojson/main.go) for an example.
 
 ## Config
 
@@ -41,6 +43,18 @@ If `files.data` is set to `-`, the output will be written to stdout. This may be
 
 ```bash
 sqltojson -config config-stdout.yaml | gzip -c > data.json.gz
+```
+
+## Development/Library
+
+Requires:
+
+* [Glide](https://glide.sh)
+* Go >=1.5 with `GO15VENDOREXPERIMENT=1`
+
+```bash
+git clone https://github.com/chop-dbhi/sqltojson.git && cd sqltojson
+glide install
 ```
 
 ## Elasticsearch

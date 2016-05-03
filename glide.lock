@@ -1,8 +1,8 @@
 hash: 50971963638be16f32ab35b674c9721ce06d72107e562c14fe0e185d6b55deb3
-updated: 2016-05-01T07:19:40.565971337-04:00
+updated: 2016-05-03T06:38:27.053828778-04:00
 imports:
 - name: github.com/chop-dbhi/sql-agent
-  version: f5097c344c9006f6d045e5867043680cd8de4f78
+  version: 40f506f45970bf4a9677a286de83b36468b33121
 - name: github.com/jmoiron/sqlx
   version: 398dd5876282499cdfd4cb8ea0f31a672abe9495
   subpackages:
