@@ -15,4 +15,8 @@ dist:
         -output="./dist/{{.OS}}/{{.Arch}}/$(PROG_NAME)" \
 		./cmd/sqltojson
 
+install:
+	export GO15VENDOREXPERIMENT=1
+	glide install
+
 .PHONY: dist
