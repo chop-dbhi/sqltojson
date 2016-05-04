@@ -139,6 +139,7 @@ type Config struct {
 	}
 	Workers     int
 	Connections int
+	MaxRetries  int `yaml:"retries"`
 	Index       string
 	Type        string
 	Schema      *Schema
@@ -153,6 +154,7 @@ func newConfig() *Config {
 	c := &Config{
 		Workers:     defaultWorkers,
 		Connections: defaultWorkers,
+		MaxRetries:  5,
 	}
 
 	c.Files.Data = defaultDataFile

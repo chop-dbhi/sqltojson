@@ -128,12 +128,20 @@ func (w *Worker) Start(cxt context.Context) {
 			// Capture build time.
 			var t0 time.Time
 
+			var i int
+
 			for {
+				if i == w.config.MaxRetries {
+					log.Fatalf("Reached max retries. Exiting")
+					break
+				}
+
 				t0 = time.Now()
 
 				if err := Build(w.config.DB, task.Schema, task.Record); err != nil {
 					log.Printf("Error %s.\nRetrying...", err)
-					time.Sleep(time.Second * 3)
+					time.Sleep(time.Second * 2)
+					i++
 					continue
 				}
 
