@@ -66,14 +66,22 @@ func StatsWriter(cxt context.Context, output io.Writer, ch <-chan time.Duration)
 }
 
 func DataWriter(cxt context.Context, config *Config, output io.Writer, ch <-chan sqlagent.Record) {
-	action := map[string]interface{}{
-		"create": map[string]string{
+	var (
+		err    error
+		target map[string]string
+	)
+
+	// Specify target index and type if included in the config.
+	if config.Index != "" {
+		target = map[string]string{
 			"_index": config.Index,
 			"_type":  config.Type,
-		},
+		}
 	}
 
-	var err error
+	action := map[string]interface{}{
+		"create": target,
+	}
 
 	encoder := json.NewEncoder(output)
 
