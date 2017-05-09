@@ -64,7 +64,7 @@ The output files are named `data.json` and `mapping.json` by default.
 ### Create Index
 
 ```bash
-curl -XPOST http://192.168.99.100:9200/my_index -d @mapping.json
+curl -XPUT http://192.168.99.100:9200/my_index -d @mapping.json
 ```
 
 ### Load Data
