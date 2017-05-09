@@ -28,6 +28,7 @@ schema:
     select p.id, alias, ethnicity, race, sex, org.name as organization
     from patient p
     left outer join organization org on (p.organization_id = org.id)
+    where p.id = :id
 
   nested:
     diagnoses:

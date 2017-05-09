@@ -142,6 +142,7 @@ type Config struct {
 	MaxRetries  int `yaml:"retries"`
 	Index       string
 	Type        string
+	IDField     string `yaml:"id_field"`
 	Schema      *Schema
 	DB          *sqlx.DB
 }

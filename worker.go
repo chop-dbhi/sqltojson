@@ -66,22 +66,24 @@ func StatsWriter(cxt context.Context, output io.Writer, ch <-chan time.Duration)
 }
 
 func DataWriter(cxt context.Context, config *Config, output io.Writer, ch <-chan sqlagent.Record) {
-	var (
-		err    error
-		target map[string]string
-	)
+	var err error
+
+	target := make(map[string]interface{})
 
 	// Specify target index and type if included in the config.
 	if config.Index != "" {
-		target = map[string]string{
-			"_index": config.Index,
-			"_type":  config.Type,
+		target["_index"] = config.Index
+
+		if config.Type != "" {
+			target["_type"] = config.Type
 		}
 	}
 
 	action := map[string]interface{}{
 		"create": target,
 	}
+
+	pickId := config.IDField != ""
 
 	encoder := json.NewEncoder(output)
 
@@ -94,6 +96,10 @@ func DataWriter(cxt context.Context, config *Config, output io.Writer, ch <-chan
 		case rec, ok := <-ch:
 			if !ok {
 				return
+			}
+
+			if pickId {
+				target["_id"] = rec[config.IDField]
 			}
 
 			if err = encoder.Encode(action); err != nil {
